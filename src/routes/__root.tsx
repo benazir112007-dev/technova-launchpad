@@ -9,8 +9,18 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/600.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Navbar } from "../components/site/Navbar";
+import { Footer } from "../components/site/Footer";
+import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -77,16 +87,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "TechNova Launchpad builds a modern, responsive website for TechNova with engaging features." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "TechNova Launchpad builds a modern, responsive website for TechNova with engaging features." },
+      { title: "TechNova — Engineering the Digital Frontier" },
+      { name: "description", content: "TechNova builds high-performance cloud, AI, and product engineering solutions for enterprises ready to scale." },
+      { name: "author", content: "TechNova" },
+      { property: "og:title", content: "TechNova — Engineering the Digital Frontier" },
+      { property: "og:description", content: "TechNova builds high-performance cloud, AI, and product engineering solutions for enterprises ready to scale." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "TechNova Launchpad builds a modern, responsive website for TechNova with engaging features." },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@TechNova" },
+      { name: "twitter:title", content: "TechNova — Engineering the Digital Frontier" },
+      { name: "twitter:description", content: "TechNova builds high-performance cloud, AI, and product engineering solutions for enterprises ready to scale." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3638c271-3866-409e-b32b-bf1db81e17db/id-preview-c2520da0--07ec1a5b-0612-4c27-8ee2-bd34b7f04b52.lovable.app-1782286022454.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3638c271-3866-409e-b32b-bf1db81e17db/id-preview-c2520da0--07ec1a5b-0612-4c27-8ee2-bd34b7f04b52.lovable.app-1782286022454.png" },
     ],
@@ -122,8 +132,15 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col bg-background">
+        <Navbar />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+      <Toaster />
     </QueryClientProvider>
   );
 }
